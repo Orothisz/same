@@ -60,7 +60,7 @@ export default function MascotDialogue() {
               alert("Oops. Obviously yes 🙄");
             } else {
               setTimeout(() => {
-                router.push("/intro");
+               // router.push("/intro");
               }, 800);
             }
           }}
