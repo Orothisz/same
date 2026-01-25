@@ -1,13 +1,12 @@
-import { AnimatePresence } from "framer-motion";
+export const metadata = {
+  title: "Sameha Land 💗",
+  description: "100 Days of Love",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
-        <AnimatePresence mode="wait">
-          {children}
-        </AnimatePresence>
-      </body>
+      <body style={{ margin: 0 }}>{children}</body>
     </html>
   );
 }
