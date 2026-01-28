@@ -16,9 +16,32 @@ export default function Valentine() {
     <main style={page}>
       {!accepted && (
         <>
-          <h1 style={title}>Will you be my Valentine?</h1>
-          <p style={subtitle}>Be honest. Or try to.</p>
+          {/* Proposal visual */}
+          <div style={proposal}>
+            <img
+              src="/images/valentine/kneeling-body.png"
+              alt=""
+              style={body}
+            />
 
+            <img
+              src="/images/valentine/sameer-face.png"
+              alt=""
+              style={face}
+            />
+
+            <img
+              src="/images/valentine/ring-box.png"
+              alt=""
+              style={ring}
+            />
+          </div>
+
+          {/* Text */}
+          <h1 style={title}>Will you be my Valentine?</h1>
+          <p style={subtitle}>Choose wisely.</p>
+
+          {/* Buttons */}
           <div style={buttons}>
             <button style={yesBtn} onClick={() => setAccepted(true)}>
               Yes
@@ -39,7 +62,7 @@ export default function Valentine() {
         <div style={celebrate}>
           <img
             src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif"
-            alt="Happy"
+            alt="Celebration"
             style={gif}
           />
           <h2 style={finalText}>Best decision you’ve ever made 💖</h2>
@@ -65,15 +88,41 @@ const page = {
   padding: "24px",
 };
 
+const proposal = {
+  position: "relative",
+  width: "min(320px, 80vw)",
+  marginBottom: 32,
+};
+
+const body = {
+  width: "100%",
+};
+
+const face = {
+  position: "absolute",
+  top: "6%",
+  left: "50%",
+  transform: "translateX(-50%)",
+  width: "28%",
+  borderRadius: "50%",
+};
+
+const ring = {
+  position: "absolute",
+  bottom: "6%",
+  right: "8%",
+  width: "22%",
+};
+
 const title = {
   fontSize: "clamp(28px, 5vw, 44px)",
-  marginBottom: 12,
+  marginBottom: 8,
   textAlign: "center",
 };
 
 const subtitle = {
   opacity: 0.7,
-  marginBottom: 48,
+  marginBottom: 40,
 };
 
 const buttons = {
