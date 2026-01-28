@@ -1,4 +1,4 @@
-import Confetti from "@/components/Confetti";
+import Confetti from "../../components/Confetti";
 
 export default function Valentine() {
   return (
