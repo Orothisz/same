@@ -2,7 +2,17 @@ import DateCounter from "../../components/DateCounter";
 
 export default function Intro() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-6 bg-gradient-to-b from-pink-200 to-purple-300 text-black">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "linear-gradient(#fde68a, #fbcfe8)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        color: "#000",
+      }}
+    >
       <DateCounter />
     </div>
   );
