@@ -8,16 +8,17 @@ export default function MascotDialogue() {
   const router = useRouter();
 
   const dialogue = [
-    "Hi Sneha 🌸 Welcome to Sameha Land.",
-    "This is a small world built slowly, softly, and only for you.",
-    "Before we go any further…",
-    "Are you excited for what you’re getting into?"
+    "Hi Sneha 🌸 Welcome to Samhya Land.",
+    "This is a world built slowly, softly, and only for you.",
+    "No rushing. No noise.",
+    "So tell me… are you excited for what you're getting into?"
   ];
 
   const [step, setStep] = useState(0);
   const [showInput, setShowInput] = useState(false);
+  const [answer, setAnswer] = useState("");
 
-  function handleNext() {
+  function next() {
     if (step < dialogue.length - 1) {
       setStep(step + 1);
     } else {
@@ -25,45 +26,40 @@ export default function MascotDialogue() {
     }
   }
 
+  function submit(e) {
+    if (e.key === "Enter") {
+      if (answer.trim().toLowerCase() === "yes") {
+        router.push("/intro");
+      } else {
+        setAnswer("yes");
+      }
+    }
+  }
+
   return (
-    <div style={wrapper}>
-      {/* Mascot */}
+    <div style={card}>
       <img
         src="/images/mascot/mascot-sneha-chibi.png"
-        alt="Sneha mascot"
+        alt="Mascot"
         style={mascot}
       />
 
-      {/* Dialogue */}
-      <TypewriterText
-        key={step}
-        text={dialogue[step]}
-        speed={55}
-      />
+      <TypewriterText key={step} text={dialogue[step]} speed={55} />
 
-      {/* Continue button */}
       {!showInput && (
-        <button onClick={handleNext} style={button}>
+        <button onClick={next} style={button}>
           Continue
         </button>
       )}
 
-      {/* Forced Yes input */}
       {showInput && (
         <input
           autoFocus
-          placeholder="Type yes…"
+          value={answer}
+          placeholder="type yes and press enter"
+          onChange={(e) => setAnswer(e.target.value)}
+          onKeyDown={submit}
           style={input}
-          onChange={(e) => {
-            if (e.target.value.toLowerCase() !== "yes") {
-              e.target.value = "yes";
-              alert("Nice try. You know the answer 🙂");
-            } else {
-              setTimeout(() => {
-                router.push("/intro");
-              }, 700);
-            }
-          }}
         />
       )}
     </div>
@@ -72,27 +68,27 @@ export default function MascotDialogue() {
 
 /* ---------- Styles ---------- */
 
-const wrapper = {
-  background: "rgba(255, 255, 255, 0.95)",
-  padding: "28px 26px",
-  borderRadius: 28,
+const card = {
+  background: "rgba(255,255,255,0.96)",
+  padding: "30px 28px",
+  borderRadius: 26,
   width: 360,
   maxWidth: "90vw",
   textAlign: "center",
-  boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
+  boxShadow: "0 30px 60px rgba(0,0,0,0.2)",
 };
 
 const mascot = {
-  width: 110,
+  width: 120,
   marginBottom: 16,
 };
 
 const button = {
-  marginTop: 18,
-  padding: "10px 22px",
-  borderRadius: 16,
+  marginTop: 20,
+  padding: "10px 26px",
+  borderRadius: 20,
   border: "none",
-  backgroundColor: "#f4a7bb",
+  background: "linear-gradient(135deg,#ffafbd,#ffc3a0)",
   color: "#fff",
   fontSize: 16,
   cursor: "pointer",
@@ -102,8 +98,8 @@ const input = {
   marginTop: 18,
   padding: 12,
   width: "100%",
-  textAlign: "center",
   borderRadius: 14,
   border: "1px solid #ccc",
+  textAlign: "center",
   fontSize: 15,
 };
