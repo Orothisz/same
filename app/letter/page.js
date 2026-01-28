@@ -54,11 +54,10 @@ export default function Letter() {
             />
 
             <p className="letter">
-              Some things aren’t written to be read quickly.
-              <br /><br />
-              They’re meant to be opened slowly.
-              <br /><br />
-              This is one of them.
+              lol hey so no paragraoh yet let's leave it for the actual day i love yeah so one thing
+i made this since i cant you know give you actual gifts nahi toh i planend that wait
+once u see the entire website ill tell then and haan okay so jab end me you get asked 
+a question try to press no alright loveyouu have fun
             </p>
 
             <Link href="/memories" className="continue">
