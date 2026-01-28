@@ -60,7 +60,7 @@ export default function MascotDialogue() {
           <input
             autoFocus
             value={answer}
-            placeholder="type yes and press enter"
+            placeholder="oopsie doopsie"
             onChange={(e) => setAnswer(e.target.value)}
             onKeyDown={submit}
             className="input"
