@@ -49,7 +49,7 @@ export default function Memories() {
 
       <header className="header">
         <h1>Our Little Moments</h1>
-        <p>Not everything needs words. Some moments just stay.</p>
+        <p>Not Hey girl wsp take a look.</p>
       </header>
 
       <section className="grid">
