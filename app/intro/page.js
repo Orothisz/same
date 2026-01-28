@@ -1,4 +1,4 @@
-import DateCounter from "@/components/DateCounter";
+import DateCounter from "../../components/DateCounter";
 
 export default function Intro() {
   return (
