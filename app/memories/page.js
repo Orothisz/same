@@ -1,46 +1,50 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Memories() {
-  const images = [
-    "/images/memories/memory-01.png",
-    "/images/memories/memory-02.png",
-    "/images/memories/memory-03.png",
-    "/images/memories/memory-04.png",
-    "/images/memories/memory-05.png",
-    "/images/memories/memory-06.png",
-    "/images/memories/memory-07.png",
-    "/images/memories/memory-08.png",
-  ];
+  const images = Array.from({ length: 8 }, (_, i) => 
+    `/images/memories/memory-0${i + 1}.png`
+  );
 
   return (
     <main style={page}>
-      {/* Header */}
+      {/* Soft texture overlay */}
+      <div style={texture} />
+
       <header style={header}>
-        <span style={eyebrow}>A quiet collection</span>
-        <h1 style={title}>Moments</h1>
-        <p style={subtitle}>Some moments don’t need explanation.</p>
+        <h1 style={title}>Little Moments</h1>
+        <p style={subtitle}>
+          Some memories don’t ask to be explained.  
+          They just ask to be felt.
+        </p>
       </header>
 
-      {/* Memory wall */}
-      <section style={wall}>
+      <section style={board}>
         {images.map((src, i) => (
-          <div key={i} style={frame}>
-            <Image
-              src={src}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 90vw, 320px"
-              priority={i < 2}
-              style={image}
-            />
+          <div
+            key={i}
+            style={{
+              ...polaroid,
+              transform: `rotate(${randomRotation(i)}deg)`,
+            }}
+          >
+            <div style={photoWrap}>
+              <Image
+                src={src}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 90vw, 260px"
+                style={photo}
+              />
+            </div>
           </div>
         ))}
       </section>
 
-      {/* Continue */}
       <footer style={footer}>
-        <Link href="/valentine" style={ghost}>
+        <Link href="/valentine" style={continueBtn}>
           Continue →
         </Link>
       </footer>
@@ -48,64 +52,80 @@ export default function Memories() {
   );
 }
 
+/* ---------- helpers ---------- */
+
+function randomRotation(i) {
+  const angles = [-4, -2, -1, 1, 2, 3, 4];
+  return angles[i % angles.length];
+}
+
 /* ---------- styles ---------- */
 
 const page = {
   minHeight: "100vh",
-  padding: "120px 32px 140px",
+  padding: "120px 24px 80px",
   background:
-    "linear-gradient(180deg, #f7f2ea 0%, #f2ebe1 100%)",
+    "linear-gradient(to bottom, #faf6f2, #f3ebe3)",
+  position: "relative",
+  overflowX: "hidden",
+};
+
+const texture = {
+  position: "absolute",
+  inset: 0,
+  backgroundImage:
+    "url(https://www.transparenttextures.com/patterns/paper-fibers.png)",
+  opacity: 0.35,
+  pointerEvents: "none",
 };
 
 const header = {
-  maxWidth: 720,
+  maxWidth: 820,
   margin: "0 auto 96px",
   textAlign: "center",
 };
 
-const eyebrow = {
-  display: "block",
-  fontSize: 12,
-  letterSpacing: "0.22em",
-  textTransform: "uppercase",
-  opacity: 0.55,
-  marginBottom: 12,
-};
-
 const title = {
-  fontSize: "clamp(36px, 5vw, 56px)",
+  fontSize: "clamp(36px, 6vw, 56px)",
   marginBottom: 16,
 };
 
 const subtitle = {
   fontSize: 18,
   opacity: 0.65,
+  lineHeight: 1.6,
 };
 
-const wall = {
+const board = {
   maxWidth: 1200,
   margin: "0 auto",
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))",
+  display: "flex",
+  flexWrap: "wrap",
   gap: 48,
+  justifyContent: "center",
 };
 
-const frame = {
+const polaroid = {
+  width: 260,
+  background: "#fff",
+  padding: "14px 14px 28px",
+  borderRadius: 6,
+  boxShadow:
+    "0 25px 50px rgba(0,0,0,0.15)",
+  transition: "transform 0.4s ease, box-shadow 0.4s ease",
+};
+
+const photoWrap = {
   position: "relative",
   width: "100%",
   aspectRatio: "3 / 4",
-  backgroundColor: "#ffffff",
-  borderRadius: 18,
-  padding: 14,
-  boxShadow:
-    "0 20px 40px rgba(0,0,0,0.12)",
-  transition:
-    "transform 0.6s cubic-bezier(.25,.8,.25,1), box-shadow 0.6s ease",
+  overflow: "hidden",
+  borderRadius: 4,
+  backgroundColor: "#ddd",
 };
 
-const image = {
+const photo = {
   objectFit: "cover",
-  borderRadius: 12,
 };
 
 const footer = {
@@ -113,11 +133,12 @@ const footer = {
   textAlign: "center",
 };
 
-const ghost = {
-  fontSize: 13,
-  letterSpacing: "0.22em",
+const continueBtn = {
+  fontSize: 14,
+  letterSpacing: "0.2em",
   textTransform: "uppercase",
-  opacity: 0.55,
+  opacity: 0.6,
   textDecoration: "none",
   color: "inherit",
+  transition: "opacity 0.3s ease",
 };
