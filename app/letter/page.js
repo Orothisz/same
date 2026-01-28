@@ -1,4 +1,4 @@
-import ScrollLetter from "@/components/ScrollLetter";
+import ScrollLetter from "../../components/ScrollLetter";
 
 export default function LetterPage() {
   return <ScrollLetter />;
