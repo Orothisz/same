@@ -2,68 +2,69 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
-/* ---------- ALL UPLOADED IMAGES ---------- */
-/* ADD EVERYTHING YOU UPLOADED HERE */
-
-const memories = [
-  // original memories
-  "memory-01.png",
-  "memory-02.png",
-  "memory-03.png",
-  "memory-04.png",
-  "memory-05.png",
-  "memory-06.png",
-  "memory-07.png",
-  "memory-08.png",
-
-  // camera uploads
-  "IMG_6107.png",
-  "IMG_6764.jpeg",
-  "IMG_6783.jpeg",
-  "IMG_7416.jpeg",
-  "IMG_7417.jpeg",
-  "IMG_7419.jpeg",
-  "IMG_7698.jpeg",
-  "IMG_7699.jpeg",
-
-  // long random filename upload
-  "90b6e9ca-3398-41e9-be7d-165e318b0b10.jpeg",
-];
-
-/* ---------- PAGE ---------- */
+import { useEffect } from "react";
 
 export default function Memories() {
+  const memories = [
+    "memory-01.png",
+    "memory-02.png",
+    "memory-03.png",
+    "memory-04.png",
+    "memory-05.png",
+    "memory-06.png",
+    "memory-07.png",
+    "memory-08.png",
+    "IMG_6107.png",
+    "IMG_6764.jpeg",
+    "IMG_6783.jpeg",
+    "IMG_7416.jpeg",
+    "IMG_7417.jpeg",
+    "IMG_7419.jpeg",
+    "IMG_7698.jpeg",
+    "IMG_7699.jpeg",
+  ];
+
+  /* Inject subtle floating heart animation */
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @keyframes float {
+        from { transform: translateY(20px) scale(0.8); opacity: 0; }
+        to { transform: translateY(-120vh) scale(1); opacity: 0.9; }
+      }
+    `;
+    document.head.appendChild(style);
+  }, []);
+
   return (
     <main className="page">
-      <div className="hearts" />
+      {/* Floating hearts */}
+      <div className="hearts">
+        {[...Array(14)].map((_, i) => (
+          <span key={i} style={{ left: `${i * 7}%`, animationDelay: `${i * 1.2}s` }}>
+            ♥
+          </span>
+        ))}
+      </div>
 
       <header className="header">
         <h1>Our Little Moments</h1>
-        <p>
-          Not everything needs words.
-          <br />
-          Some moments just stay.
-        </p>
+        <p>Not everything needs words. Some moments just stay.</p>
       </header>
 
       <section className="grid">
         {memories.map((img, i) => (
-          <div
-            key={img}
-            className="polaroid"
-            style={{
-              transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (2 + (i % 3))}deg)`,
-            }}
-          >
-            <Image
-              src={`/images/memories/${img}`}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 80vw, 260px"
-              priority={i < 3}
-              className="photo"
-            />
+          <div className="polaroid" key={i} style={{ animationDelay: `${i * 0.08}s` }}>
+            <div className="photoWrap">
+              <Image
+                src={`/images/memories/${img}`}
+                alt=""
+                fill
+                sizes="(max-width: 768px) 90vw, 260px"
+                priority={i < 4}
+                className="photo"
+              />
+            </div>
             <span className="caption">♥</span>
           </div>
         ))}
@@ -75,107 +76,134 @@ export default function Memories() {
         </Link>
       </footer>
 
-      {/* ---------- STYLES ---------- */}
+      {/* Styles */}
       <style jsx>{`
         .page {
           min-height: 100vh;
-          background: linear-gradient(180deg, #fde1ea, #fff);
           padding: 120px 24px 80px;
+          background:
+            radial-gradient(circle at top, #ffe8f1 0%, #f9f2f6 40%, #fff 100%);
           position: relative;
-          overflow-x: hidden;
+          overflow: hidden;
         }
 
+        /* Floating hearts */
+        .hearts {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .hearts span {
+          position: absolute;
+          bottom: -20px;
+          font-size: 18px;
+          opacity: 0.35;
+          animation: float 14s linear infinite;
+        }
+
+        /* Header */
         .header {
+          max-width: 900px;
+          margin: 0 auto 96px;
           text-align: center;
-          margin-bottom: 90px;
+          position: relative;
+          z-index: 1;
         }
 
         .header h1 {
-          font-size: clamp(32px, 5vw, 46px);
+          font-size: clamp(42px, 7vw, 64px);
+          font-weight: 600;
           margin-bottom: 12px;
+          letter-spacing: -0.02em;
         }
 
         .header p {
-          opacity: 0.7;
-          line-height: 1.6;
+          font-size: 18px;
+          opacity: 0.65;
         }
 
+        /* Grid */
         .grid {
-          max-width: 1250px;
+          max-width: 1200px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-          gap: 64px 48px;
+          grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+          gap: 56px 40px;
+          position: relative;
+          z-index: 1;
         }
 
+        /* Polaroid */
         .polaroid {
           background: #fff;
-          padding: 14px 14px 42px;
-          border-radius: 6px;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
-          position: relative;
-          transition: transform 0.45s ease, box-shadow 0.45s ease;
+          padding: 16px 16px 28px;
+          border-radius: 12px;
+          box-shadow:
+            0 30px 60px rgba(0,0,0,0.12);
+          transform: translateY(20px) rotate(var(--r, -2deg));
+          animation: rise 0.6s ease forwards;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .polaroid:nth-child(even) {
+          --r: 2deg;
         }
 
         .polaroid:hover {
-          transform: rotate(0deg) scale(1.05);
-          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-          z-index: 3;
+          transform: translateY(-8px) rotate(0deg) scale(1.04);
+          box-shadow: 0 40px 80px rgba(0,0,0,0.18);
+        }
+
+        @keyframes rise {
+          to {
+            transform: translateY(0) rotate(var(--r, -2deg));
+            opacity: 1;
+          }
+        }
+
+        /* Image wrapper */
+        .photoWrap {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 3 / 4;
+          overflow: hidden;
+          border-radius: 6px;
+          background: #f2f2f2;
         }
 
         .photo {
           object-fit: cover;
-          border-radius: 4px;
         }
 
+        /* Caption */
         .caption {
-          position: absolute;
-          bottom: 10px;
-          left: 0;
-          width: 100%;
+          display: block;
           text-align: center;
-          opacity: 0.3;
+          margin-top: 12px;
+          opacity: 0.4;
+          letter-spacing: 0.3em;
         }
 
+        /* Footer */
         .footer {
-          margin-top: 130px;
+          margin-top: 120px;
           text-align: center;
         }
 
         .continue {
-          font-size: 12px;
+          font-size: 13px;
           letter-spacing: 0.22em;
           text-transform: uppercase;
-          opacity: 0.55;
+          opacity: 0.5;
           text-decoration: none;
           color: inherit;
+          transition: opacity 0.3s ease;
         }
 
-        /* floating hearts */
-        .hearts::before,
-        .hearts::after {
-          content: "♥";
-          position: fixed;
-          bottom: -10%;
-          font-size: 20px;
-          color: rgba(255, 90, 140, 0.25);
-          animation: floatUp 14s linear infinite;
-          pointer-events: none;
-        }
-
-        .hearts::after {
-          left: 70%;
-          font-size: 16px;
-          animation-duration: 20s;
-        }
-
-        @keyframes floatUp {
-          from {
-            transform: translateY(0) translateX(0);
-          }
-          to {
-            transform: translateY(-140vh) translateX(-60px);
-          }
+        .continue:hover {
+          opacity: 0.9;
         }
       `}</style>
     </main>
