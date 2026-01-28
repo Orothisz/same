@@ -3,9 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-/* ---------- DATA ---------- */
+/* ---------- ALL UPLOADED IMAGES ---------- */
+/* ADD EVERYTHING YOU UPLOADED HERE */
 
 const memories = [
+  // original memories
   "memory-01.png",
   "memory-02.png",
   "memory-03.png",
@@ -14,6 +16,19 @@ const memories = [
   "memory-06.png",
   "memory-07.png",
   "memory-08.png",
+
+  // camera uploads
+  "IMG_6107.png",
+  "IMG_6764.jpeg",
+  "IMG_6783.jpeg",
+  "IMG_7416.jpeg",
+  "IMG_7417.jpeg",
+  "IMG_7419.jpeg",
+  "IMG_7698.jpeg",
+  "IMG_7699.jpeg",
+
+  // long random filename upload
+  "90b6e9ca-3398-41e9-be7d-165e318b0b10.jpeg",
 ];
 
 /* ---------- PAGE ---------- */
@@ -21,13 +36,13 @@ const memories = [
 export default function Memories() {
   return (
     <main className="page">
-      {/* floating hearts */}
       <div className="hearts" />
 
       <header className="header">
         <h1>Our Little Moments</h1>
         <p>
-          Not everything needs words.  
+          Not everything needs words.
+          <br />
           Some moments just stay.
         </p>
       </header>
@@ -38,15 +53,15 @@ export default function Memories() {
             key={img}
             className="polaroid"
             style={{
-              transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (3 + i % 3)}deg)`,
+              transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (2 + (i % 3))}deg)`,
             }}
           >
             <Image
               src={`/images/memories/${img}`}
               alt=""
               fill
-              sizes="(max-width: 768px) 80vw, 280px"
-              priority={i < 2}
+              sizes="(max-width: 768px) 80vw, 260px"
+              priority={i < 3}
               className="photo"
             />
             <span className="caption">♥</span>
@@ -60,12 +75,11 @@ export default function Memories() {
         </Link>
       </footer>
 
-      {/* styles */}
+      {/* ---------- STYLES ---------- */}
       <style jsx>{`
         .page {
           min-height: 100vh;
-          background:
-            linear-gradient(180deg, #fde2ea, #fff);
+          background: linear-gradient(180deg, #fde1ea, #fff);
           padding: 120px 24px 80px;
           position: relative;
           overflow-x: hidden;
@@ -73,41 +87,40 @@ export default function Memories() {
 
         .header {
           text-align: center;
-          margin-bottom: 80px;
+          margin-bottom: 90px;
         }
 
         .header h1 {
-          font-size: clamp(32px, 5vw, 48px);
+          font-size: clamp(32px, 5vw, 46px);
           margin-bottom: 12px;
         }
 
         .header p {
           opacity: 0.7;
-          max-width: 420px;
-          margin: 0 auto;
+          line-height: 1.6;
         }
 
         .grid {
-          max-width: 1200px;
+          max-width: 1250px;
           margin: 0 auto;
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
           gap: 64px 48px;
         }
 
         .polaroid {
           background: #fff;
-          padding: 14px 14px 40px;
+          padding: 14px 14px 42px;
           border-radius: 6px;
-          box-shadow:
-            0 20px 40px rgba(0,0,0,0.12);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.14);
           position: relative;
-          transition: transform 0.4s ease;
+          transition: transform 0.45s ease, box-shadow 0.45s ease;
         }
 
         .polaroid:hover {
-          transform: rotate(0deg) scale(1.04);
-          z-index: 2;
+          transform: rotate(0deg) scale(1.05);
+          box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+          z-index: 3;
         }
 
         .photo {
@@ -125,43 +138,43 @@ export default function Memories() {
         }
 
         .footer {
-          margin-top: 120px;
+          margin-top: 130px;
           text-align: center;
         }
 
         .continue {
-          letter-spacing: 0.2em;
           font-size: 12px;
+          letter-spacing: 0.22em;
           text-transform: uppercase;
-          opacity: 0.6;
+          opacity: 0.55;
           text-decoration: none;
           color: inherit;
         }
 
-        /* hearts */
+        /* floating hearts */
         .hearts::before,
         .hearts::after {
           content: "♥";
-          position: absolute;
-          font-size: 24px;
+          position: fixed;
+          bottom: -10%;
+          font-size: 20px;
           color: rgba(255, 90, 140, 0.25);
-          animation: float 12s linear infinite;
+          animation: floatUp 14s linear infinite;
+          pointer-events: none;
         }
 
         .hearts::after {
           left: 70%;
-          animation-duration: 18s;
-          font-size: 18px;
+          font-size: 16px;
+          animation-duration: 20s;
         }
 
-        @keyframes float {
+        @keyframes floatUp {
           from {
-            bottom: -10%;
-            transform: translateX(0);
+            transform: translateY(0) translateX(0);
           }
           to {
-            bottom: 110%;
-            transform: translateX(-60px);
+            transform: translateY(-140vh) translateX(-60px);
           }
         }
       `}</style>
