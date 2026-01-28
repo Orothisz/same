@@ -1,8 +1,6 @@
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Intro() {
-  const router = useRouter();
-
   return (
     <main style={page}>
       <section style={content}>
@@ -12,9 +10,9 @@ export default function Intro() {
 
         <p style={sub}>Since 20 October 2025</p>
 
-        <button style={ghost} onClick={() => router.push("/letter")}>
+        <Link href="/letter" style={ghost}>
           Read
-        </button>
+        </Link>
       </section>
     </main>
   );
@@ -52,11 +50,11 @@ const sub = {
 
 const ghost = {
   marginTop: 56,
-  background: "none",
-  border: "none",
   fontSize: 13,
   letterSpacing: "0.18em",
   textTransform: "uppercase",
   opacity: 0.5,
   cursor: "pointer",
+  textDecoration: "none",
+  color: "inherit",
 };
