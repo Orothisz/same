@@ -71,10 +71,14 @@ export default function Valentine() {
       {accepted && (
         <div style={celebrate}>
           <Image
-            src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDZ0aGZlbjNta3VqZzlsamJzOHlrd2Vlc2VvZGczcnYxNnpzOWtoZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bpTL6wXRuMQpMIVduB/giphy.gif"
-            alt="Celebration"
-            style={gif}
-          />
+  src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDZ0aGZlbjNta3VqZzlsamJzOHlrd2Vlc2VvZGczcnYxNnpzOWtoZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/bpTL6wXRuMQpMIVduB/giphy.gif"
+  alt="Celebration"
+  width={320}
+  height={320}
+  unoptimized
+  style={gif}
+/>
+
           <h2 style={finalText}>Oye hoye lol thank you sneha garg i love you sooo much this was the only option u had btw lol loveu</h2>
         </div>
       )}
