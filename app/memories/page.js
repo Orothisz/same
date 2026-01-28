@@ -1,15 +1,13 @@
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Memories() {
-  const router = useRouter();
-
   return (
     <main style={page}>
       <p style={text}>Some moments don’t need explanation.</p>
 
-      <button style={ghost} onClick={() => router.push("/valentine")}>
+      <Link href="/valentine" style={ghost}>
         Continue
-      </button>
+      </Link>
     </main>
   );
 }
@@ -30,11 +28,11 @@ const text = {
 };
 
 const ghost = {
-  background: "none",
-  border: "none",
   fontSize: 13,
   letterSpacing: "0.18em",
   textTransform: "uppercase",
   opacity: 0.5,
   cursor: "pointer",
+  textDecoration: "none",
+  color: "inherit",
 };
