@@ -1,5 +1,67 @@
-import ScrollLetter from "../../components/ScrollLetter";
+"use client";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { letterText } from "../../data/letterText";
 
-export default function LetterPage() {
-  return <ScrollLetter />;
+export default function Letter() {
+  const [endReached, setEndReached] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    function onScroll() {
+      const nearBottom =
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 120;
+
+      if (nearBottom) setEndReached(true);
+    }
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  return (
+    <main style={page}>
+      <article style={letter}>
+        <p style={{ whiteSpace: "pre-line" }}>{letterText}</p>
+      </article>
+
+      {endReached && (
+        <div style={next}>
+          <button onClick={() => router.push("/memories")} style={ghost}>
+            Continue
+          </button>
+        </div>
+      )}
+    </main>
+  );
 }
+
+/* ---------- styles ---------- */
+
+const page = {
+  minHeight: "100vh",
+  padding: "120px 24px",
+};
+
+const letter = {
+  maxWidth: 720,
+  margin: "0 auto",
+  fontSize: 18,
+  lineHeight: 1.75,
+};
+
+const next = {
+  marginTop: 120,
+  textAlign: "center",
+};
+
+const ghost = {
+  background: "none",
+  border: "none",
+  fontSize: 13,
+  letterSpacing: "0.18em",
+  textTransform: "uppercase",
+  opacity: 0.5,
+  cursor: "pointer",
+};
