@@ -54,7 +54,6 @@ const ghost = {
   letterSpacing: "0.18em",
   textTransform: "uppercase",
   opacity: 0.5,
-  cursor: "pointer",
   textDecoration: "none",
   color: "inherit",
 };
