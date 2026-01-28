@@ -6,7 +6,7 @@ export default function Intro() {
   return (
     <main style={page}>
       <section style={card}>
-        <span style={meta}>Time, measured gently</span>
+        <span style={meta}>Time</span>
 
         <h1 style={title}>100 Days Together</h1>
 
