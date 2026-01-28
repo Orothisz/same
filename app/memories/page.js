@@ -1,4 +1,4 @@
-import PhotoCard from "@/components/PhotoCard";
+import PhotoCard from "../../components/PhotoCard";
 
 export default function Memories() {
   return (
