@@ -1,20 +1,40 @@
-import PhotoCard from "../../components/PhotoCard";
+import { useRouter } from "next/navigation";
 
 export default function Memories() {
+  const router = useRouter();
+
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        padding: 32,
-        background: "#0e0e14",
-        display: "grid",
-        gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-        gap: 16,
-      }}
-    >
-      {[...Array(6)].map((_, i) => (
-        <PhotoCard key={i} index={i + 1} />
-      ))}
-    </div>
+    <main style={page}>
+      <p style={text}>Some moments don’t need explanation.</p>
+
+      <button style={ghost} onClick={() => router.push("/valentine")}>
+        Continue
+      </button>
+    </main>
   );
 }
+
+/* ---------- styles ---------- */
+
+const page = {
+  minHeight: "100vh",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+};
+
+const text = {
+  fontSize: 22,
+  marginBottom: 48,
+};
+
+const ghost = {
+  background: "none",
+  border: "none",
+  fontSize: 13,
+  letterSpacing: "0.18em",
+  textTransform: "uppercase",
+  opacity: 0.5,
+  cursor: "pointer",
+};
