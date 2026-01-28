@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { letterText } from "../../data/letterText";
 
 export default function Letter() {
   const [endReached, setEndReached] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     function onScroll() {
@@ -27,11 +26,11 @@ export default function Letter() {
       </article>
 
       {endReached && (
-        <div style={next}>
-          <button onClick={() => router.push("/memories")} style={ghost}>
+        <footer style={footer}>
+          <Link href="/memories" style={ghost}>
             Continue
-          </button>
-        </div>
+          </Link>
+        </footer>
       )}
     </main>
   );
@@ -51,17 +50,16 @@ const letter = {
   lineHeight: 1.75,
 };
 
-const next = {
+const footer = {
   marginTop: 120,
   textAlign: "center",
 };
 
 const ghost = {
-  background: "none",
-  border: "none",
   fontSize: 13,
   letterSpacing: "0.18em",
   textTransform: "uppercase",
   opacity: 0.5,
-  cursor: "pointer",
+  textDecoration: "none",
+  color: "inherit",
 };
