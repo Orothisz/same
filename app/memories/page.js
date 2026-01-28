@@ -48,8 +48,8 @@ export default function Memories() {
       </div>
 
       <header className="header">
-        <h1>Our Little Moments</h1>
-        <p>Not Hey girl wsp take a look.</p>
+        <h1> Moments</h1>
+        <p> Hey girl wsp take a look.</p>
       </header>
 
       <section className="grid">
