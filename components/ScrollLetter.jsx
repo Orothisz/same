@@ -1,4 +1,4 @@
-import { letterText } from "@/data/letterText";
+import { letterText } from "../data/letterText";
 
 export default function ScrollLetter() {
   return (
