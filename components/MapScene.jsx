@@ -3,49 +3,72 @@ import MascotDialogue from "./MascotDialogue";
 
 export default function MapScene() {
   return (
-    <div style={container}>
-      {/* Soft background gradient */}
-      <div style={gradient} />
+    <div style={page}>
+      {/* Background */}
+      <div style={sky} />
 
-      {/* Floating “islands” */}
-      <div style={{ ...island, top: "20%", left: "10%" }} />
-      <div style={{ ...island, top: "55%", left: "65%", transform: "scale(1.2)" }} />
-      <div style={{ ...island, top: "35%", left: "40%", transform: "scale(0.8)" }} />
+      {/* Map layer */}
+      <div style={map}>
+        <Land x="15%" y="30%" size={280} />
+        <Land x="60%" y="55%" size={320} />
+        <Land x="38%" y="40%" size={220} />
+      </div>
 
-      {/* Center content */}
-      <div style={content}>
+      {/* Dialogue */}
+      <div style={focus}>
         <MascotDialogue />
       </div>
     </div>
   );
 }
 
-const container = {
+/* ---------- Components ---------- */
+
+function Land({ x, y, size }) {
+  return (
+    <div
+      style={{
+        ...land,
+        left: x,
+        top: y,
+        width: size,
+        height: size * 0.65,
+      }}
+    />
+  );
+}
+
+/* ---------- Styles ---------- */
+
+const page = {
   position: "relative",
   minHeight: "100vh",
   overflow: "hidden",
   backgroundColor: "#f7efe5",
 };
 
-const gradient = {
+const sky = {
   position: "absolute",
   inset: 0,
   background:
-    "radial-gradient(circle at 30% 20%, #fde2e4, transparent 50%), radial-gradient(circle at 70% 60%, #e2ece9, transparent 55%)",
+    "linear-gradient(to bottom, #fef6e4 0%, #f3d2c1 100%)",
 };
 
-const island = {
+const map = {
   position: "absolute",
-  width: 260,
-  height: 180,
-  background:
-    "radial-gradient(ellipse at center, #cdb4db 0%, #ffc8dd 60%, transparent 70%)",
-  filter: "blur(12px)",
-  opacity: 0.6,
-  borderRadius: "50%",
+  inset: 0,
 };
 
-const content = {
+const land = {
+  position: "absolute",
+  background:
+    "radial-gradient(ellipse at center, #cdb4db 0%, #ffc8dd 55%, #ffd6a5 75%)",
+  borderRadius: "50%",
+  filter: "blur(10px)",
+  opacity: 0.75,
+};
+
+const focus = {
   position: "relative",
   zIndex: 2,
   minHeight: "100vh",
