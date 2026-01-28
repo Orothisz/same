@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Valentine() {
   const [accepted, setAccepted] = useState(false);
@@ -18,21 +19,30 @@ export default function Valentine() {
         <>
           {/* Proposal visual */}
           <div style={proposal}>
-            <img
+            <Image
               src="/images/valentine/kneeling-body.png"
               alt=""
+              width={320}
+              height={480}
+              priority
               style={body}
             />
 
-            <img
+            <Image
               src="/images/valentine/sameer-face.png"
               alt=""
+              width={90}
+              height={90}
+              priority
               style={face}
             />
 
-            <img
+            <Image
               src="/images/valentine/ring-box.png"
               alt=""
+              width={70}
+              height={70}
+              priority
               style={ring}
             />
           </div>
@@ -60,9 +70,12 @@ export default function Valentine() {
 
       {accepted && (
         <div style={celebrate}>
-          <img
+          <Image
             src="https://media.giphy.com/media/26FLdmIp6wJr91JAI/giphy.gif"
             alt="Celebration"
+            width={320}
+            height={320}
+            priority
             style={gif}
           />
           <h2 style={finalText}>Best decision you’ve ever made 💖</h2>
@@ -96,6 +109,7 @@ const proposal = {
 
 const body = {
   width: "100%",
+  height: "auto",
 };
 
 const face = {
@@ -103,7 +117,6 @@ const face = {
   top: "6%",
   left: "50%",
   transform: "translateX(-50%)",
-  width: "28%",
   borderRadius: "50%",
 };
 
@@ -111,7 +124,6 @@ const ring = {
   position: "absolute",
   bottom: "6%",
   right: "8%",
-  width: "22%",
 };
 
 const title = {
@@ -158,6 +170,7 @@ const celebrate = {
 
 const gif = {
   width: "min(320px, 80vw)",
+  height: "auto",
   borderRadius: 16,
   marginBottom: 24,
 };
