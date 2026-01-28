@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 
 export default function Letter() {
@@ -13,7 +14,7 @@ export default function Letter() {
           ...card,
           transform: opened ? "rotateX(180deg)" : "rotateX(0deg)",
         }}
-        onClick={() => setOpened(true)}
+        onClick={() => !opened && setOpened(true)}
       >
         {/* Front */}
         {!opened && (
@@ -26,18 +27,14 @@ export default function Letter() {
         {/* Inside */}
         {opened && (
           <div style={inside}>
-            <div style={photoFrame}>
-              <Image
-                src="/images/memories/memory-01.png"
-                alt=""
-                fill
-                priority
-                sizes="(max-width: 768px) 70vw, 280px"
-                style={{ objectFit: "cover" }}
-                placeholder="blur"
-                blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjZWVlIi8+"
-              />
-            </div>
+            <Image
+              src="/images/memories/memory-01.png"
+              alt=""
+              width={280}
+              height={360}
+              priority
+              style={photo}
+            />
 
             <p style={letter}>
               Some things aren’t written to be read quickly.
@@ -46,6 +43,11 @@ export default function Letter() {
               <br /><br />
               This is one of them.
             </p>
+
+            {/* Continue */}
+            <Link href="/memories" style={continueBtn}>
+              Continue →
+            </Link>
           </div>
         )}
       </div>
@@ -60,15 +62,15 @@ const page = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  background: "#f6f1ea",
+  background: "linear-gradient(180deg, #f6f1ea, #efe7dc)",
   perspective: "1200px",
 };
 
 const card = {
   width: "min(380px, 85vw)",
-  height: 520,
+  height: "520px",
   background: "#fbfaf8",
-  borderRadius: 14,
+  borderRadius: 18,
   boxShadow: "0 40px 80px rgba(0,0,0,0.18)",
   position: "relative",
   cursor: "pointer",
@@ -93,8 +95,8 @@ const ribbon = {
 const seal = {
   position: "absolute",
   bottom: 48,
-  letterSpacing: 3,
-  opacity: 0.5,
+  letterSpacing: 4,
+  opacity: 0.55,
 };
 
 const inside = {
@@ -109,18 +111,24 @@ const inside = {
   backfaceVisibility: "hidden",
 };
 
-const photoFrame = {
-  position: "relative",
-  width: 280,
-  aspectRatio: "3 / 4",
-  borderRadius: 8,
-  overflow: "hidden",
+const photo = {
+  borderRadius: 12,
   marginBottom: 28,
-  background: "#eee",
+  objectFit: "cover",
 };
 
 const letter = {
   textAlign: "center",
   lineHeight: 1.6,
-  opacity: 0.8,
+  opacity: 0.75,
+  marginBottom: 28,
+};
+
+const continueBtn = {
+  textDecoration: "none",
+  fontSize: 14,
+  letterSpacing: 2,
+  textTransform: "uppercase",
+  opacity: 0.6,
+  transition: "opacity 0.3s ease",
 };
